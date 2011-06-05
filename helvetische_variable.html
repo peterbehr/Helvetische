@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta http-equiv="Content-Language" content="en" />
+    <meta name="author" content="Peter Behr" />
+    {block:Description}
+    <meta name="description" content="{MetaDescription}" />
+    {/block:Description}
+    <meta name="keywords" content="" />
+    <meta name="robots" content="all" />
+    
+    <title>
+        {Title} {block:PostTitle}{PostTitle}{/block:PostTitle}
+    </title>
+    
+    <link rel="shortcut icon" href="{Favicon}" />
+    <link rel="alternate" type="application/rss+xml" href="{RSS}" />
+    <link rel="apple-touch-icon" href="{PortraitURL-128}" />
+    
+    <style type="text/css" media="screen">
+        /* BEGIN resets */
+        
+        html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, figcaption, figure, footer, header, hgroup, menu, nav, section, summary, time, mark, audio, video {
+            margin: 0px;
+            padding: 0px;
+            border: 0px;
+            outline: 0px;
+            font-size: 100%;
+            font-family: inherit;
+            font-weight: inherit;
+            font-style: inherit;
+            font-variant: inherit;
+            line-height: inherit;
+            vertical-align: baseline;
+        }
+        
+        html {
+            line-height: 1;
+            font-size: 100%;
+            font-weight: normal;
+            font-style: normal;
+            font-style: normal;
+            font-variant: normal;
+        }
+        
+        table { border-collapse: collapse; border-spacing: 0px; }
+        
+        blockquote, q { quotes: none; }
+        
+        blockquote:before, blockquote:after, q:before, q:after { content: ''; content: none; }
+        
+        ins { text-decoration: none; }
+        
+        del { text-decoration: line-through; }
+        
+        ol, ul, li { list-style: none; }
+        
+        caption, th { text-align: left; }
+        
+        sup { vertical-align: text-top; }
+        
+        sub { vertical-align: text-bottom; }
+        
+        hr { margin: 0px; padding: 0px; }
+        
+        /* END resets */
+
+        html {
+            font-family: "Helvetica Neue", "Helvetica", sans-serif;
+            line-height: 1;
+            font-size: 1em;
+            font-weight: 300;
+            color: #333;
+            background: #f9f9f9;
+        }
+        
+        h1 { font-size: 3em; }
+        h2 { font-size: 2em; }
+        h3 { font-size: 1.5em; }
+        
+        a {
+            color: #999;
+        }
+        
+        #top {
+            height: 4em;
+            margin: 0;
+            padding: 0;
+        }
+        
+        #top .marks, #top .slugs {
+            float: left;
+        }
+        
+        #top .marks {
+            width: 4em;
+            height: 4em;
+        }
+        
+        #top .marks .corner.left.vertical {
+            width: 0.1em;
+            height: 2em;
+            position: relative;
+            top: 1em;
+            left: 4em;
+            background: #333;
+        }
+        
+        #top .marks .corner.left.horizontal {
+            width: 2em;
+            height: 0.1em;
+            position: relative;
+            top: 4em;
+            left: 1em;
+            background: #333;
+        }
+
+        #top .slugs {
+            padding: 0em 0em 0em 2.5em;
+            height: 4em;
+        }
+        
+        #top .slugs .slug.horizontal {
+            float: left;
+            padding: 0em 0em 0em 1.5em;
+        }
+        
+        .slug.horizontal div {
+            width: 1.5em;
+            height: 1em;
+            float: left;
+        }
+        
+        .slug.vertical div {
+            width: 0.5em;
+            height: 1.5em;
+        }
+        
+        #left {
+            float: left;
+            width: 4em;
+        }
+        
+        #left .slugs {
+            padding: 6.5em 0em 0em 0em;
+        }
+        
+        #left .slugs .slug {
+            padding: 1.5em 0em 0em 0em;
+        }
+        
+        #interior {
+            width: auto;
+            padding: 2em 0em 2em 2em;
+            margin: 0em 0em 0em 4em;
+        }
+        
+        #interior .header {
+            margin: 0em 0em 4em 0em;
+        }
+        
+        #interior .header .portrait {
+            width: 64px;
+            height: 64px;
+            background: #ccc;
+            float: left;
+        }
+        
+        #interior .title {
+            font-weight: 700;
+            margin: 0em 0em 0.25em 0em;
+        }
+        
+        #interior .description {
+            font-size: 1.5em;
+            width: 20em;
+            line-height: 1.3;
+        }
+        
+        #interior .post {
+            padding: 0em 0em 4em 0em;
+        }
+        
+        #interior .post h3 {
+            font-weight: 700;
+            padding: 0em 0em 0.5em 0em;
+        }
+        
+        #interior .post p, #interior .post blockquote {
+            line-height: 1.6;
+            width: 30em;
+        }
+        
+        #interior .post .meta {
+            font-size: 0.9em;
+            margin: 1em 0em 0em 0em;
+            padding: 0em;
+            color: #fff;
+        }
+        
+        #interior .post.text h3 {
+            color: #0000c0; /* B */
+        }
+        
+        #interior .post.photo h3 {
+            color: #009090; /* C */
+        }
+        
+        #interior .post.photo div.photo {
+            background: #e0e0e0;
+            width: 500px;
+            padding: 1em;
+        }
+        
+        #interior .post.quote h3 {
+            color: #009000; /* G */
+        }
+        
+        #interior .post.quote blockquote {
+            border-left: #009000 solid 0.35em;
+            padding-left: 0.5em;
+            font-size: 1em;
+        }
+        
+        #interior .post.link h3 {
+            color: #909000; /* Y */
+        }
+        
+        #interior .post.chat h3 {
+            color: #900000; /* R */
+        }
+        
+        #interior .post.audio h3 {
+            color: #900090; /* M */
+        }
+        
+        #interior .post.video h3 {
+            color: #909090; /* K */
+        }
+        
+        #interior .post.video div.video {
+            background: #e0e0e0;
+            width: 500px;
+            padding: 1em;
+        }
+        
+        #bottom {
+            height: 4em;
+            margin: 0;
+            padding: 0;
+            clear: both;
+        }
+        
+        #bottom .marks, #bottom .slugs {
+            float: left;
+        }
+        
+        #bottom .marks {
+            width: 4em;
+            height: 4em;
+        }
+        
+        #bottom .marks .corner.left.vertical {
+            width: 0.1em;
+            height: 2em;
+            position: relative;
+            bottom: -1em;
+            left: 4em;
+            background: #333;
+        }
+        
+        #bottom .marks .corner.left.horizontal {
+            width: 2em;
+            height: 0.1em;
+            position: relative;
+            bottom: 0em;
+            left: 1em;
+            background: #333;
+        }
+
+        #bottom .slugs {
+            padding: 0em 0em 0em 2.5em;
+            height: 4em;
+        }
+        
+        #bottom .slugs .footer {
+            height: 2em;
+            padding: 1em 0em 0.5em 0em;
+        }
+        
+        #bottom .slugs .slug.horizontal div {
+            height: 0.5em;
+        }
+        
+        dd, dt, li {
+            line-height: 1.5;
+        }
+        
+        dt {
+            font-weight: 700;
+        }
+        
+        dd {
+            padding-left: 2em;
+        }
+    </style>
+    
+</head>
+
+<body>
+
+<div id="top">
+    <div class="marks">
+        <div class="corner left horizontal"></div>
+        <div class="corner left vertical"></div>
+    </div>
+    <div class="slugs">
+        <div class="slug horizontal">
+            <div style="background: #202020;"></div>
+            <div style="background: #404040;"></div>
+            <div style="background: #606060;"></div>
+            <div style="background: #808080;"></div>
+            <div style="background: #a0a0a0;"></div>
+            <div style="background: #c0c0c0;"></div>
+            <div style="background: #e0e0e0;"></div>
+        </div>
+        <div class="slug horizontal">
+            <div style="background: #009090;"></div>
+            <div style="background: #00c0c0;"></div>
+            <div style="background: #00e0e0;"></div>
+            <div style="background: #00ffff;"></div>
+            <div style="background: #a0ffff;"></div>
+            <div style="background: #c0ffff;"></div>
+            <div style="background: #e0ffff;"></div>
+        </div>
+        <div class="slug horizontal">
+            <div style="background: #900090;"></div>
+            <div style="background: #c000c0;"></div>
+            <div style="background: #e000e0;"></div>
+            <div style="background: #ff00ff;"></div>
+            <div style="background: #ffa0ff;"></div>
+            <div style="background: #ffc0ff;"></div>
+            <div style="background: #ffe0ff;"></div>
+        </div>
+        <div class="slug horizontal">
+            <div style="background: #909000;"></div>
+            <div style="background: #c0c000;"></div>
+            <div style="background: #e0e000;"></div>
+            <div style="background: #ffff00;"></div>
+            <div style="background: #ffffa0;"></div>
+            <div style="background: #ffffc0;"></div>
+            <div style="background: #ffffe0;"></div>
+        </div>
+    </div>
+</div>
+
+<div id="left">
+    <div class="slugs">
+        <div class="slug vertical">
+            <div style="background: #900000;"></div>
+            <div style="background: #c00000;"></div>
+            <div style="background: #e00000;"></div>
+            <div style="background: #ff0000;"></div>
+            <div style="background: #ffa0a0;"></div>
+            <div style="background: #ffc0c0;"></div>
+            <div style="background: #ffe0e0;"></div>
+        </div>
+        <div class="slug vertical">
+            <div style="background: #009000;"></div>
+            <div style="background: #00c000;"></div>
+            <div style="background: #00e000;"></div>
+            <div style="background: #00ff00;"></div>
+            <div style="background: #a0ffa0;"></div>
+            <div style="background: #c0ffc0;"></div>
+            <div style="background: #e0ffe0;"></div>
+        </div>
+        <div class="slug vertical">
+            <div style="background: #000090;"></div>
+            <div style="background: #0000c0;"></div>
+            <div style="background: #0000e0;"></div>
+            <div style="background: #0000ff;"></div>
+            <div style="background: #a0a0ff;"></div>
+            <div style="background: #c0c0ff;"></div>
+            <div style="background: #e0e0ff;"></div>
+        </div>
+    </div>
+</div>
+
+<div id="interior">
+    <div class="header">
+        <!--div class="portrait">
+        </div-->
+        <h1 class="title">
+            {Title}
+        </h1>
+        {block:Description}
+        <h2 class="description">
+            {Description}
+        </h2>
+        {/block:Description}
+    </div>
+    
+    <div id="posts">
+    {block:Posts}
+        {block:Text}
+        <div class="post text">
+            {block:Title}
+            <h3>{Title}</h3>
+            {/block:Title}
+            {Body}
+            <div class="meta">
+                {block:Date}
+                <a href="{Permalink}">{DayOfWeek}, {Month} {DayOfMonth}, {Year}</a>
+                {/block:Date}
+            </div>
+        </div>
+        {/block:Text}
+        
+        {block:Photo}
+        <div class="post photo">
+            {block:Caption}
+            <h3 class="caption">
+                {Caption}
+            </h3>
+            {/block:Caption}
+            <div class="photo">
+                {LinkOpenTag}<img src="{PhotoURL-500}" alt="{PhotoAlt}"/>{LinkCloseTag}
+            </div>
+            <div class="meta">
+                {block:Date}
+                <a href="{Permalink}">{DayOfWeek}, {Month} {DayOfMonth}, {Year}</a>
+                {/block:Date}
+            </div>
+        </div>
+        {/block:Photo}
+        
+        <!--{block:Photoset}
+        {/block:Photoset}-->
+        
+        {block:Quote}
+        <div class="post quote">
+            {block:Source}
+            <h3>{Source}:</h3>
+            {/block:Source}
+            <blockquote>
+                {Quote}
+            </blockquote>
+            <div class="meta">
+                {block:Date}
+                <a href="{Permalink}">{DayOfWeek}, {Month} {DayOfMonth}, {Year}</a>
+                {/block:Date}
+            </div>
+        </div>
+        {/block:Quote}
+        
+        {block:Link}
+        <div class="post link">
+            <a href="{URL}" {Target}><h3>{Name}</h3></a>
+            {block:Description}
+                <p>{Description}</p>
+            {/block:Description}
+            <div class="meta">
+                {block:Date}
+                <a href="{Permalink}">{DayOfWeek}, {Month} {DayOfMonth}, {Year}</a>
+                {/block:Date}
+            </div>
+        </div>
+        {/block:Link}
+        
+        {block:Chat}
+        <div class="post chat">
+            {block:Title}
+            <h3>{Title}</h3>
+            {/block:Title}
+            <dl>
+                {block:Lines}
+                <dt>
+                    {block:Label}
+                    {Label}
+                    {/block:Label}
+                </dt>
+                <dd>
+                    {Line}
+                </dd>
+                {/block:Lines}
+            </dl>
+            <div class="meta">
+                {block:Date}
+                <a href="{Permalink}">{DayOfWeek}, {Month} {DayOfMonth}, {Year}</a>
+                {/block:Date}
+            </div>
+        </div>
+        {/block:Chat}
+        
+        {block:Audio}
+        <div class="post audio">
+            {block:Caption}
+            <h3 class="caption">
+                {Caption}
+            </h3>
+            {/block:Caption}
+            <dl>
+                {block:AlbumArt}
+                <dt>Album art</dt>
+                <dd><a href="{AlbumArtURL}">{AlbumArtURL}</a></dd>
+                {/block:AlbumArt}
+                {block:Artist}
+                <dt>Artist</dt>
+                <dd>{Artist}</dd>
+                {/block:Artist}
+                {block:Album}
+                <dt>Album</dt>
+                <dd>{Album}</dd>
+                {/block:Album}
+                {block:TrackName}
+                <dt>Track name</dt>
+                <dd>{TrackName}</dd>
+                {/block:TrackName}
+            </dl>
+            {AudioPlayer}
+            {block:ExternalAudio}
+            <a href="{ExternalAudioURL}">External URL</a>
+            {/block:ExternalAudio}
+            <div class="meta">
+                {block:Date}
+                <a href="{Permalink}">{DayOfWeek}, {Month} {DayOfMonth}, {Year}</a>
+                {/block:Date}
+            </div>
+        </div>
+        {/block:Audio}
+        
+        {block:Video}
+        <div class="post video">
+            {block:Caption}
+            <h3 class="caption">
+                {Caption}
+            </h3>
+            {/block:Caption}
+            <div class="video">
+                {Video-500}
+            </div>
+            <div class="meta">
+                {block:Date}
+                <a href="{Permalink}">{DayOfWeek}, {Month} {DayOfMonth}, {Year}</a>
+                {/block:Date}
+            </div>
+        </div>
+        {/block:Video}
+    {/block:Posts}
+    </div>
+    
+    {block:Pagination}
+    <div id="pagination">
+        {block:NextPage}
+        <a href="{NextPage}">Older posts</a>
+        {/block:NextPage}
+        <a href="{NextPage}">Older posts</a>
+        {CurrentPage} of {TotalPages}
+        {block:PreviousPage}
+        <a href="{PreviousPage}">Newer posts</a>
+        {/block:PreviousPage}
+    </div>
+    {/block:Pagination}
+    
+</div>
+
+<div id="bottom">
+    <div class="marks">
+        <div class="corner left horizontal"></div>
+        <div class="corner left vertical"></div>
+    </div>
+    <div class="slugs">
+        <div class="footer">
+            Made with careful consideration and arithmetic by <a href="http://peterbehr.net">Peter Behr</a> in 2011. Powered by <a href="http://tumblr.com">Tumblr</a>.
+        </div>
+        <div class="slug horizontal">
+            <div style="background: #202020;"></div>
+            <div style="background: #404040;"></div>
+            <div style="background: #606060;"></div>
+            <div style="background: #808080;"></div>
+            <div style="background: #a0a0a0;"></div>
+            <div style="background: #c0c0c0;"></div>
+            <div style="background: #e0e0e0;"></div>
+        </div>
+    </div>
+</div>
+
+</body>
+
+</html>
